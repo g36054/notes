@@ -1,0 +1,206 @@
+notes
+=====
+
+shell.0.notes.txt
+a g (g36054@gmail.com)
+
+tidy -xml -utf8 -w 0 ongoing.atom
+xmlstarlet sel -N atom="http://www.w3.org/2005/Atom" -t -m /atom:feed/atom:entry -v atom:title -n
+xmlstarlet sel -N atom="http://www.w3.org/2005/Atom" -t -c /atom:feed/atom:entry[2] -n
+xmlstarlet sel -N atom="http://www.w3.org/2005/Atom" -t -v "count(/atom:feed/atom:entry)" -n 
+
+python -m http.server 8000
+
+sudo hdparm -I /dev/sda' | grep TRIM
+
+/dev/mapper/wagon-wagon_data /run/media/agriffith/37634a60-9c12-447d-9a87-602dd7559921 ext4 rw,seclabel,nosuid,nodev,relatime,data=ordered,noauto,comment=systemd.automount 0 0
+
+exiftool -Title="This is the Title" -Author="Happy Man" -Subject="PDF Metadata" drawing.pdf
+
+export j=4; for i in *.JPG; do let j+=1 ; mv $i datacentershots$j.jpg ; done
+
+find $HOME/Domai -type f -printf "%s  " -exec md5sum {} \; | gawk '{print $2 "  " $3}'|md5sum -c
+sed '$!N;s/\n/ /' #join line pairs
+
+# can use multiple -exec
+find -type f -printf "%s  " -execdir md5sum {} \; -exec ls -l {} \;
+
+export GREP_OPTIONS="--binary-files=without-match --color=auto --devices=skip --exclude-dir=CVS --exclude-dir=.libs --exclude-dir=.deps --exclude-dir=.svn"
+
+
+find $HOME/Domai -type f -printf "%s  " -exec md5sum {} \;|awk 'BEGIN { FS="  " } { c[$2]++; l[$2,c[$2]]=$0 } END { for (i in c) { if (c[i] > 1) for (j = 1; j <= c[i]; j++) print l[i,j] } }'
+
+ls *\ *
+
+git init
+git add .
+git commit -m 'message'
+
+VIM
+:w !sh
+:%!bash
+:%s/.*/\="mv -i ".submatch(0)." ".substitute(submatch(0), "foo", "bar", "g")/g
+
+cat backtrace | grep lib | tr -s ' ' | cut -f4 -d' ' | sort | uniq | grep "/" | xargs rpm -qf --qf "%{name}\n" | xargs debuginfo-install -y
+
+for i in {1..15}; do echo $i; done
+awk '{for(i=5;i<=NF;i++){printf "%s ", $i}; printf "\n"}'
+ls *.mp3|while read line; do mv "${line}" "${line/[0-1][0-9]/Sting}"; done
+ls|while read line; do mv "$line" ${line// /_}; done
+
+update-desktop-database
+
+openssl speed sha
+
+export GZIP="--rsyncable"
+rsync -r -t -c -s /home/agriffith/Domai /run/media/agriffith/37634a60-9c12-447d-9a87-602dd7559921/Domai
+rsync -rtsv /home/agriffith/Domai /home/agriffith/gmail /run/media/agriffith/37634a60-9c12-447d-9a87-602dd7559921
+rsync -rtsv --ignore-existing $HOME/.mozilla/firefox/qjcdn3ld.default/ScrapBook $HOME/{gmail,Me} $KINGSTON/rsync-backup
+
+grub2-mkconfig couldn't be executed successfully. error message: /etc/default/grub: line 58: terminal_output: command not found
+
+setxkbmap -option terminate:ctrl_alt_bksp
+gnome-session-quit --logout --force --no-prompt
+systemctl restart gdm
+reisub
+
+kill -HUP $(cat /var/run/SERVICE.pid)
+
+kexec -l /boot/vmlinuz-linux --initrd=/boot/initramfs-linux.img --reuse-cmdline
+kexec -e
+
+/usr/bin/perl: symbol lookup error: /usr/lib64/perl5/vendor_perl/auto/Time/Piece/Piece.so: undefined symbol: Perl_Gthr_key_ptr
+  cpan
+  force reinstall Time::Piece
+
+gnome-terminal --hide-menubar --maximize -e "htop"
+
+chkconfig libvirtd on
+virsh autostart vmName
+---------------------------
+systemd-analyze
+systemd-analyze blame
+systemctl list-units
+systemctl stop avahi-daemon.service
+systemctl disable avahi-daemon.service
+
+journalctl
+journalctl -k -b -1
+/etc/group systemd-journal:x:190:agriffith
+
+*PRINTERS*
+lpstat -p -d                 #list printers and default
+lpoptions -d MFCJ4510DW      #set default
+lpoptions -p MFCJ4510DW -l   #list printer options
+cupsctl --debug-logging
+cupsctl --no-debug-logging 
+systemctl restart cups.service
+
+# ln -sf /lib/systemd/system/multi-user.target /etc/systemd/system/default.target
+# ln -sf /lib/systemd/system/graphical.target /etc/systemd/system/default.target
+
+systemctl isolate multi-user.target (or) systemctl isolate runlevel3.target
+systemctl isolate graphical.target (or) systemctl isolate runlevel5.target
+---------------------------
+avahi-browse -a
+  just the printer
+
+PCI ID list
+/usr/share/hwdata/pci.ids
+http://lxr.linux.no/linux+%2a/arch/x86/include/asm/cpufeature.h
+iommu=noaperture #no agp bridge found
+version of fedora: $(rpm -E %fedora)
+sudo dmidecode --type 1 #make/model
+dmidecode --type memory 
+
+# rpm -q --whatrequires rtkit
+pulseaudio-0.9.21-14.el6_3.x86_64
+
+rpm -q --changelog {package-name} | grep CVE
+
+openssl genrsa -des3 -out awgriffith.key 2048
+openssl req -new -key awgriffith.key -out awgriffith.csr
+
+fix man apropos
+how? fix /etc/default/grub
+ctrl c doesn't break configure
+
+git-annex requires haskell
+
+sudo yum autoremove
+sudo yum updateinfo
+
+yum deplist glusterfs
+repoquery --whatrequires kdebase
+repoquery --whatrequires --installed --recursive kdebase
+
+repoquery --list *package*
+rpm -ql package-name
+
+rpm -q --scripts *package*
+
+yum provides /etc/default/grub
+
+sudo yum install fedora-release-rawhide
+sudo yum install gnome-logs --enablerepo=rawhide
+yum --nogpgcheck localinstall 
+yum history info ##
+
+yum remove libfprint coolkey pcsc-lite plymouth*
+dracut -f
+sudo authconfig --disablefingerprint --update
+sudo authconfig --test
+
+
+grub2-install /dev/sda
+grub2-mkconfig -o /boot/grub2/grub.cfg
+
+#!/bin/sh
+exec tail -n +3 $0
+# This file provides an easy way to add custom menu entries. Simply type the
+# menu entries you want to add after this comment. Be careful not to change
+# the 'exec tail' line above. 
+
+cat /proc/sys/kernel/random/uuid
+cat /proc/scsi/scsi
+
+rpm -qa --queryformat "\{NAME:%{NAME}, SIZE:%{SIZE}\}\n"
+
+lpadmin -p MFCJ4510DW -E -v usb://Brother/MFC-J4510DW?serial=BROH2F439003 -P /usr/share/cups/model/Brother/brother_mfcj4510dw_printer_en.ppd
+
+#decrypt pdf
+gs -q -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sOutputFile=OUTPUT.pdf -c .setpdfwrite -f INPUT.pdf
+
+zcat /usr/share/man/man1/man.1.gz  | groff -mandoc -Thtml
+
+dd if=/dev/hda of=/root/hda.boot.mbr bs=512 count=1
+dd if=/mnt/hda1/root/hda.boot.mbr of=/dev/hda bs=512 count=1
+dd if=/dev/hda of=/root/hda.mbr.noparttab bs=446 count=1
+
+avconv -i input.mp4 -vn -qscale 1 output.mp3
+gs -sDEVICE=jpeg -o %03d.jpeg -dFirstPage=12 -dLastPage=12 -dJPEGQ=30 -r72x72 file.pdf
+
+
+
+ddrescue –n –b 2048 /dev/dvd output.iso
+dvd­backup –M –i output.iso –o dvd_structure
+
+ls|while read i; do pdfinfo "${i}" > "${i}".info ;done
+grep -l Encrypted:.*yes *.info
+
+#sudo apt-get install gpac
+MP4Box -cat part1.mp4 -cat part2.mp4 -new joinedfile.mp4
+pdftk *.pdf cat output lisp_book_parts.pdf
+
+mkdir {001..056}
+for i in {028..056}; do c=0; cd $i; ls|while read j;do (( c++ )); mv "$j" ${i}-$c.JPG ;done; cd ..; done
+
+
+curl -b cookies.txt -d "title=thetitle&menu%5Blink_title%5D=&menu%5Bparent%5D=primary-links%3A0&menu%5Bweight%5D=0&teaser_include=1&body=content+here&format=1&changed=&form_build_id=form-01fbf44be3dab1ea177d17544bce415c&form_token=f1af1b01946065a34e49fdbde8fcc64b&form_id=story_node_form&log=&comment=2&pathauto_perform_alias=1&field_pidio%5B0%5D%5Bembed%5D=&name=admin&date=&status=1&promote=1&op=Save" http://localhost/subdo/node/add/story
+
+
+ls|while read line; do mv "$line" ${line// /_};done
+find . -depth -name "* *" -execdir rename 's/ /_/g' "{}" \;
+
+
+Displaying shell.0.notes.txt.
