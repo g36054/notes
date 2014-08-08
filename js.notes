@@ -1,0 +1,186 @@
+
+Last modified
+js.notes.txt
+
+javascript:(function(){m='http://mail.google.com/mail/?view=cm&fs=1&tf=1&to=g36054@gmail.com&su=BM.articles:%20'+encodeURIComponent(document.title)+'&body='+encodeURIComponent(document.location);w=window.open(m,'addwindow','');setTimeout(function(){w.focus();},%20250);})();
+
+function generateUUID(){
+    var d = new Date().getTime();
+    var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = (d + Math.random()*16)%16 | 0;
+        d = Math.floor(d/16);
+        return (c=='x' ? r : (r&0x7|0x8)).toString(16);
+    });
+    return uuid;
+};
+
+//example recursive function
+var power = function (base, exponent) {
+  if (exponent === 0) {
+    return 1;
+  } else {
+    return base * power(base, exponent - 1);
+  }
+}
+
+console.log(power(2,3))
+
+
+javascript:(function(){ 
+var e,s,IB=4408,L=location.href,LL=L.length; 
+function isDigit(c){return ("0" <= c && c <= "9")};
+for (e=LL-1; e>=0; --e) if (isDigit(L.charAt(e))){for(s=e-1; s>=0; --s) if (!isDigit(L.charAt(s))) break; break;}
+++s;
+if (e<0) return;
+oldNum = L.substring(s,e+1);
+newNum = "" + (Math.floor((Math.random()*IB)+1));
+while (newNum.length < oldNum.length) newNum = "0" + newNum;
+location.href = L.substring(0,s) + newNum + L.slice(e+1); })();
+
+javascript:(function(){%20%20var%20e,s;%20IB=4408;%20%20%20%20function%20isDigit(c)%20{%20return%20("0"%20<=%20c%20&&%20c%20<=%20"9")%20}%20%20%20%20L%20=%20location.href;%20%20%20%20LL%20=%20L.length;%20%20%20%20for%20(e=LL-1;%20e>=0;%20--e)%20if%20(isDigit(L.charAt(e)))%20{%20%20%20%20%20%20for(s=e-1;%20s>=0;%20--s)%20if%20(!isDigit(L.charAt(s)))%20break;%20%20%20%20%20%20break;%20%20%20%20}%20%20%20%20++s;%20%20%20%20if%20(e<0)%20return;%20%20%20%20oldNum%20=%20L.substring(s,e+1);%20%20%20%20newNum%20=%20""%20+%20(Math.floor((Math.random()*IB)+1));%20%20%20%20while%20(newNum.length%20<%20oldNum.length)%20newNum%20=%20"0"%20+%20newNum;%20%20%20%20location.href%20=%20L.substring(0,s)%20+%20newNum%20+%20L.slice(e+1);%20%20})();
+
+//Tweet
+javascript:(function(){
+  f='http://twitter.com/share?url='+encodeURIComponent(window.location.href)+'&text='+encodeURIComponent(document.title);
+  a=function(){
+    if(!window.open(f))location.href=f
+  };
+  if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}
+  })()
+
+//html tree
+javascript:function getChildren(obj,lvl){
+  var ind='';
+  for(var j=0;j<lvl;j++)ind+='  ';
+  var s='';
+
+  //each branch
+  for(var i=0;i<obj.childNodes.length;i++){
+    var s0=obj.childNodes[i];
+    var nn=s0.nodeName.toUpperCase();
+
+    //get comments
+    if(nn=='#comment'||nn.indexOf('!')==0){
+      s+='\n  '+ind+'<!-- (comment) -->';}
+
+    //get #text
+    else if(nn.indexOf('#')==0){
+      //s+='\n  '+ind+s0.nodeName;
+      s+='\n  '+ind+s0.nodeValue;
+    }
+
+    //get tags
+    else{ s+='\n  '+ind+'<'+nn+'>';
+
+    //get attributes
+    if(nn!='BR'&&nn!='HR'&&nn!='IMG'&&nn!='INPUT'&&nn!='META'&&nn!='LINK'){
+      var attribs='', s1=s0.attributes
+      for(var k=0;k<s1.length;k++){
+        if(s1[k].specified) attribs+=s1[k].nodeName+'='+s1[k].nodeValue+', ';
+      }
+      if(attribs!='')s+=' ('+attribs.substring(0,attribs.length-2)+')';
+
+    //recurse to branches
+    s+=getChildren(s0,lvl+1);
+
+    //return to tree
+    //s+='\n  '+ind+'</'+nn+'>';
+    if (s.slice(-2) != '\n\n') s+='\n';
+    }}}
+    return s;}
+
+var msg='<HTML>'+getChildren(document.documentElement,0)+'\n</HTML>';
+W=open('','','resizable,scrollbars=1');
+with(W.document){
+  writeln('<h3>'+document.location.href+'</h3>');
+  writeln('<plaintext>'+msg);
+  close();
+}
+void(0);
+
+//Random
+javascript:(function(){ 
+var e,s; IB=4975; 
+  function isDigit(c) { return ("0" <= c && c <= "9") } 
+  L = location.href; 
+  LL = L.length; 
+  for (e=LL-1; e>=0; --e) if (isDigit(L.charAt(e))) { 
+    for(s=e-1; s>=0; --s) if (!isDigit(L.charAt(s))) break; 
+    break; 
+  } 
+  ++s; 
+  if (e<0) return; 
+  oldNum = L.substring(s,e+1); 
+  newNum = "" + (Math.floor((Math.random()*IB)+1)); 
+  while (newNum.length < oldNum.length) newNum = "0" + newNum; 
+  location.href = L.substring(0,s) + newNum + L.slice(e+1); 
+})();
+
+//+=1
+javascript:(function(){ 
+  var e,s; IB=1; 
+  function isDigit(c) { return ("0" <= c && c <= "9") } 
+  L = location.href; 
+  LL = L.length; 
+  for (e=LL-1; e>=0; --e) if (isDigit(L.charAt(e))) { 
+    for(s=e-1; s>=0; --s) if (!isDigit(L.charAt(s))) break; 
+    break; 
+  } 
+  ++s; 
+  if (e<0) return; 
+  oldNum = L.substring(s,e+1); 
+  newNum = "" + (parseInt(oldNum,10) + IB); 
+  while (newNum.length < oldNum.length) newNum = "0" + newNum; 
+  location.href = L.substring(0,s) + newNum + L.slice(e+1); 
+})();
+
+javascript:(function(){ var e,s; IB=-1; function isDigit(c) { return ("0" <= c && c <= "9") } L = location.href; LL = L.length; for (e=LL-1; e>=0; --e) if (isDigit(L.charAt(e))) { for(s=e-1; s>=0; --s) if (!isDigit(L.charAt(s))) break; break; } ++s; if (e<0) return; oldNum = L.substring(s,e+1); newNum = "" + (parseInt(oldNum,10) + IB); while (newNum.length < oldNum.length) newNum = "0" + newNum; location.href = L.substring(0,s) + newNum + L.slice(e+1); })();
+
+javascript:(function(){ document.getElementById("post-2676").style.border="5px solid red";})();
+javascript:(function(){ var b=document.getElementsByTagName('body')[0];while (b.lastChild){b.removeChild(b.lastChild);}})();
+javascript:(function(){ var b=document.getElementsByTagName('body')[0];while (b.lastChild){b.lastChild.remove();}})();
+
+javascript:(function(){document.getElementById("toc").remove();})(); //document.getElementsByClassName("my-elements").remove();
+javascript:(function(){ var a=[],i=0,b=document.getElementsByTagName("article"),c=b.length;for(i;i<c;i++){a[i]=b[i].id;}alert(a)})();
+
+javascript:(
+function(){ var e,s; IB=1; function isDigit(c) { return ("0" <= c && c <= "9") } L = location.href; LL = L.length; for (e=LL-1; e>=0; --e) if (isDigit(L.charAt(e))) { for(s=e-1; s>=0; --s) if (!isDigit(L.charAt(s))) break; break; } ++s; if (e<0) return; oldNum = L.substring(s,e+1); newNum = "" + (parseInt(oldNum,10) + IB); while (newNum.length < oldNum.length) newNum = "0" + newNum; location.href = L.substring(0,s) + newNum + L.slice(e+1); })();
+
+//Autoresize textarea to fit number of lines.
+var keyUpTimeout = false; // Required variables for performance
+var keyupTimer = 0;
+
+$("#text_textarea").keyup(function(e) {
+    var cooldownTimeout = 500;
+    //Set the cooldown time-out. The height check will be executed when the user
+    // hasn't initiated another keyup event within this time
+
+    var ths = this;
+    function heightCheck(){
+        keyupTimer = false;
+        // Reset height, so that the textarea can shrink when necessary
+        ths.style.height = "";
+
+        // Set the height of the textarea
+        var newheight = this.scrollHeight + 2;
+        ths.style.height = newheight + "px";
+    }
+    if(keyupTimeout){ //Has a cooldown been requested?
+        clearTimeout(keyupTimer); //This+next line: Refresh cooldown timeout.
+        keyUpTimer = setTimeout(heightCheck, cooldownTimeout);
+        return; //Return, to avoid unnecessary calculations
+    }
+
+    // Set a cooldown
+    keyupTimer = setTimeout(heightCheck, cooldownTimeout);
+    keyupTimeout = true; //Request a cooldown
+});
+
+id rddet
+javascript:(function(){var text=document.getElementById('rddet').value;text=text.replace(/AGE\/DATE/g,'\\\nAGE/DATE');}())
+
+
+(function(){document.getElementById('condition')i.selectedIndex=2}())
+javascript:(function(){var d=document.getElementsByTagName('body')[0],f=document.createElement('div'),c,e,b=0;a=d.getElementsByTagName('*');for(b;b<a.length;b++){c=a[b].children.length;if(c==0)f.appendChild(a[b].parentNode.removeChild(a[b]));d.appendChild(f);}}())
+
+Displaying js.notes.txt.
