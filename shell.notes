@@ -4,6 +4,8 @@ notes
 shell.0.notes.txt
 a g (g36054@gmail.com)
 
+su - username -c startx
+
 tidy -xml -utf8 -w 0 ongoing.atom
 xmlstarlet sel -N atom="http://www.w3.org/2005/Atom" -t -m /atom:feed/atom:entry -v atom:title -n
 xmlstarlet sel -N atom="http://www.w3.org/2005/Atom" -t -c /atom:feed/atom:entry[2] -n
