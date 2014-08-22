@@ -8,7 +8,7 @@ su - username -c startx
 
 git config --global user.name "Your Name"
 git config --global user.email you@example.com
-git commit --append --message "message"
+git commit -a -m "message" (--append, --message)
 
 
 tidy -xml -utf8 -w 0 ongoing.atom
